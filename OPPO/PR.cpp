@@ -27,7 +27,7 @@ int main() {
     for (auto file : files) {
         cout << "Название файла: " << file.name << endl;
         cout << "Дата создания: " << file.date << endl;
-        cout << "Размер: " << file.size << " байт" << endl;
+        cout << "Размер файла: " << file.size << " байт" << endl;
         cout << endl;
     }
     return 0;
