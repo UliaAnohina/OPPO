@@ -5,30 +5,74 @@
 #include <sstream>
 using namespace std;
 
-struct ZADANIE {
-    string name, date;
-    int size;
+struct DATA {
+    int dd, mm, yy;
 };
 
-int main() {
-    setlocale(LC_ALL, ".1251");
+struct ZADANIE {
+    string name, size;
+    DATA date;
+};
+
+void readFileName(stringstream& ss, ZADANIE& file) // Функция для считывания названия файла
+{
+    getline(ss, file.name, ' ');
+}
+
+void readFileSize(stringstream& ss, ZADANIE& file) // Функция для считывания размера файла
+{
+    getline(ss, file.size, ' ');
+}
+
+void readFileDate(stringstream& ss, ZADANIE& file) // Функция для считывания даты создания файла
+{
+    string date;
+    getline(ss, date, '.');
+    file.date.dd = stoi(date);
+
+    getline(ss, date, '.');
+    file.date.mm = stoi(date);
+
+    getline(ss, date);
+    file.date.yy = stoi(date);
+}
+
+void readData(vector<ZADANIE>& files) // Функция для вызова функций считывания данных
+{
     ifstream in("ZADANIE.txt");
-    vector<ZADANIE> files;
     string line;
 
     while (getline(in, line)) {
         stringstream ss(line);
         ZADANIE file;
-        ss >> file.name >> file.size >> file.date;
+
+        readFileName(ss, file);
+        readFileSize(ss, file);
+        readFileDate(ss, file);
+
         files.push_back(file);
     }
     in.close();
+}
 
-    for (auto file : files) {
-        cout << "Название файла: " << file.name << endl;
-        cout << "Дата создания: " << file.date << endl;
-        cout << "Размер файла: " << file.size << " байт" << endl;
-        cout << endl;
+void printFile(const ZADANIE & file) // Функция для вывода информации о файле
+{
+    cout << "Название файла: " << file.name << endl;
+    cout << "Дата создания: " << file.date.dd << "." << file.date.mm << "." << file.date.yy << endl;
+    cout << "Размер файла: " << file.size << " байт" << endl << endl;
+}
+
+int main() 
+{
+    setlocale(LC_ALL, "russian");
+    vector<ZADANIE> files;
+
+    readData(files);
+
+    for (const auto& file : files) 
+    {
+        printFile(file);
     }
+
     return 0;
 }
