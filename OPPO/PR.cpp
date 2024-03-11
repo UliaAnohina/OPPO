@@ -14,17 +14,17 @@ struct ZADANIE {
     DATA date;
 };
 
-void readFileName(stringstream& ss, ZADANIE& file) // Функция для считывания названия файла
+void readFileName(stringstream& ss, ZADANIE& file) // Г”ГіГ­Д™Г¶ДЌЛ™ Г¤Г«Л™ Е„Г·ДЌЕ€Е±ГўЕ•Г­ДЌЛ™ Г­Е•Г§ГўЕ•Г­ДЌЛ™ ГґЕ•Г©Г«Е•
 {
     getline(ss, file.name, ' ');
 }
 
-void readFileSize(stringstream& ss, ZADANIE& file) // Функция для считывания размера файла
+void readFileSize(stringstream& ss, ZADANIE& file) // Г”ГіГ­Д™Г¶ДЌЛ™ Г¤Г«Л™ Е„Г·ДЌЕ€Е±ГўЕ•Г­ДЌЛ™ Д‘Е•Г§Д›ДєД‘Е• ГґЕ•Г©Г«Е•
 {
     getline(ss, file.size, ' ');
 }
 
-void readFileDate(stringstream& ss, ZADANIE& file) // Функция для считывания даты создания файла
+void readFileDate(stringstream& ss, ZADANIE& file) // Г”ГіГ­Д™Г¶ДЌЛ™ Г¤Г«Л™ Е„Г·ДЌЕ€Е±ГўЕ•Г­ДЌЛ™ Г¤Е•Е€Е± Е„Г®Г§Г¤Е•Г­ДЌЛ™ ГґЕ•Г©Г«Е•
 {
     string date;
     getline(ss, date, '.');
@@ -37,9 +37,12 @@ void readFileDate(stringstream& ss, ZADANIE& file) // Функция для считывания дат
     file.date.yy = stoi(date);
 }
 
-void readData(vector<ZADANIE>& files) // Функция для вызова функций считывания данных
+void readData(vector<ZADANIE>& files) // Г”ГіГ­Д™Г¶ДЌЛ™ Г¤Г«Л™ ГўЕ±Г§Г®ГўЕ• ГґГіГ­Д™Г¶ДЌГ© Е„Г·ДЌЕ€Е±ГўЕ•Г­ДЌЛ™ Г¤Е•Г­Г­Е±Е‘
 {
     ifstream in("ZADANIE.txt");
+    if (!in) {
+        cout << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»" << endl;
+    }
     string line;
 
     while (getline(in, line)) {
@@ -55,11 +58,11 @@ void readData(vector<ZADANIE>& files) // Функция для вызова функций считывания д
     in.close();
 }
 
-void printFile(const ZADANIE & file) // Функция для вывода информации о файле
+void printFile(const ZADANIE & file) // Г”ГіГ­Д™Г¶ДЌЛ™ Г¤Г«Л™ ГўЕ±ГўГ®Г¤Е• ДЌГ­ГґГ®Д‘Д›Е•Г¶ДЌДЌ Г® ГґЕ•Г©Г«Дє
 {
-    cout << "Название файла: " << file.name << endl;
-    cout << "Дата создания: " << file.date.dd << "." << file.date.mm << "." << file.date.yy << endl;
-    cout << "Размер файла: " << file.size << " байт" << endl << endl;
+    cout << "ГЌЕ•Г§ГўЕ•Г­ДЌДє ГґЕ•Г©Г«Е•: " << file.name << endl;
+    cout << "Г„Е•Е€Е• Е„Г®Г§Г¤Е•Г­ДЌЛ™: " << file.date.dd << "." << file.date.mm << "." << file.date.yy << endl;
+    cout << "ДђЕ•Г§Д›ДєД‘ ГґЕ•Г©Г«Е•: " << file.size << " ГЎЕ•Г©Е€" << endl << endl;
 }
 
 int main() 
